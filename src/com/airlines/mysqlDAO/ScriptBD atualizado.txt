@@ -1,0 +1,318 @@
+﻿show databases;
+
+create database airlines;
+
+show airlines;
+
+use airlines;
+
+-- Tabela Cliente
+create table tabCliente
+( 
+    clCod_Cliente 	int NOT NULL AUTO_INCREMENT,
+	clNome 			Varchar(50) NOT NULL,
+    clSobrenome 	Varchar(50) NOT NULL,
+	clDtNascimento 	DATE NOT NULL,
+	clTratamento	char(15) NOT NULL,
+	clTipo			char(10) NOT NULL,
+	clEmail			Varchar(50) NOT NULL,
+	clDDD			SMALLINT(5) NOT NULL,
+	clCelular		integer(15) NOT NULL,
+    Primary key (clCod_Cliente)
+)engine=innodb default charset=UTF8;
+
+SHOW CREATE TABLE tabCliente;
+
+describe tabCliente;
+show tables;
+
+insert into tabCliente values (null,'Josefá','Cazaquistão','1963-12-01',
+								'Senhora', 'Adulto', 'sesefaTesuda2012@hotmail.com',
+								11,9666-6969),
+
+							(null,'Beatriz','Simma','1994-03-18',
+								'Senhorita', 'Adulto', 'amoOVitinho@yahoo.com.br',
+								63,98760-2341);
+
+            
+select * from tabCliente order by clNome;
+
+-- Tabela Aeronave 
+
+create table tabAeronave
+( 
+    aeCod_Aeronave 	int NOT NULL AUTO_INCREMENT,
+	aeModelo 		Varchar(50) NOT NULL,
+    aeNome 			Varchar(50) NOT NULL,
+	aeTipo 			Varchar(50) NOT NULL,
+	aeQtPassageiros	int(15) NOT NULL,
+    Primary key (aeCod_Aeronave)
+)engine=innodb default charset=UTF8;
+
+SHOW CREATE TABLE tabAeronave;
+describe tabAeronave;
+show tables;
+
+insert into tabAeronave values (null,'Forks 100','Piuzinho',
+								'Bimotor', 20),
+
+							(null,'Lindu','Grande branco',
+								'Jatão', 242);
+
+            
+select * from tabAeronave;
+
+create table tabVoo
+(
+	voCod_Voo			int NOT NULL auto_increment,
+	vofkCod_Aeronave	int not null,
+	voOrigem			varchar(50) not null,
+	voDestino			varchar(50) not null,
+	voDataHoraSaida		datetime not null,
+	voDataHoraChegada	datetime not null,
+	voSituacao			varchar(20) not null,
+	primary key(voCod_Voo),
+	foreign key(vofkCod_Aeronave)
+	references tabAeronave(aeCod_Aeronave)
+)engine=innodb default charset=UTF8;
+
+-- ALTER TABLE tabVoo ADD 
+	-- CONSTRAINT vofkCod_Aeronave
+	-- FOREIGN KEY ( aeCod_Aeronave) 
+	-- REFERENCES tabAeronave (aeCod_Aeronave) 
+	-- on delete no action
+	-- on update no action;
+
+SHOW CREATE TABLE tabVoo;
+describe tabVoo;
+show tables;
+
+insert into tabVoo values(null,1,'Malibu','Santos',
+	'2014-03-03 11:30', '2014-03-03 14:30:00', 'Confirmado',1),
+	(null,2,'Carapicuiba','Caraguatatuba',
+	'2015-06-04 09:45', '2015-06-04 11:30:00', 'Cancelado',2);
+
+select * from tabVoo;
+
+create table tabPassagem
+(
+	paCod_Passagem		int NOT NULL auto_increment,
+	pafkCod_Voo			int not null,
+	pafkCod_Cliente		int,
+	paPreco				decimal(10,2) not null,
+	paAssento			SMALLINT(3) not null,
+	paTaxa				decimal(10,2) not null,
+	paPesoBagagem		decimal(10,2),
+	primary key(pa),
+	foreign key(pafkCod_Voo, paAssento)
+		references tabVoo(voCod_Voo),
+	foreign key(pafkCod_Cliente)
+		references tabCliente(clCod_Cliente),
+)engine=innodb default charset=UTF8;
+
+SHOW CREATE TABLE tabPassagem;
+describe tabPassagem;
+show tables;
+
+insert into tabPassagem values(null,1,1,302.3,23,45.75,4,21.1,'Reservada');
+
+select * from tabPassagem;
+
+create table tabCartao
+(
+	cafkCod_Passagem	int NOT NULL,
+	caTotal				decimal(10,2) not null,
+	caTitular			varchar(50) not null,
+	caCpf				smallint(10) not null,
+	caNumCartao			SMALLINT(15) not null,
+	caDtValidade		date not null,
+	caCodSeguranca		SMALLINT(1) not null,
+	primary key(cafkCod_Passagem),
+	foreign key(cafkCod_Passagem)
+		references tabPassagen(paCod_Passagem)
+		on delete no action
+		on update no action
+)engine=innodb default charset=UTF8;
+
+SHOW CREATE TABLE tabCartao;
+describe tabCartao;
+show tables;
+
+insert into tabCartao values(1,1,140.3,'Minha mamai',
+	333333333, 444444444, '2015-05-06', 2);
+
+select * from tabCartao;
+
+
+CREATE TABLE tabAssento(
+	assCod_Assento		int not null,
+	assCod_Voo			int not null,
+	assCod_Passagem		int,
+	primary key(assCod_Assento, assCod_Voo),
+	foreign key(assCod_Voo) references tabVoo(voCod_Voo),
+	foreign key(assCod_Passagem) references tabPassagem(paCod_Passagem)
+	)engine=innodb default charset=UTF8;
+	
+CREATE TABLE tabLogin(
+	login		varchar[45] not null,
+	senha		varchar[45] not null,
+	primary key(login),
+	)engine=innodb default charset=UTF8;
+	
+	
+	
+	
+	
+-------------------------------------------------------------------------------------------------------
+show databases;
+
+create database airlines;
+
+use airlines;
+
+CREATE TABLE tabLogin(
+	login		varchar(45) not null,
+	senha		varchar(45) not null,
+    cliente		int not null,
+	primary key(login),
+    foreign key(cliente) references tabCliente(clCod_Cliente)
+    )engine=innodb default charset=UTF8;
+    
+INSERT INTO tabLogin values (md5('teste@teste'), md5('teste'),8 );
+
+select * from tabLogin;
+
+select count(*),cliente from tabLogin where login = md5('teste@teste') AND senha = md5('teste');
+
+show schemas;
+
+drop table tabLogin;
+
+select * from tabAeronave;
+
+delete from tabAeronave where aeCod_Aeronave >= 8;
+
+
+
+create table tabCliente
+( 
+    clCod_Cliente 	int NOT NULL AUTO_INCREMENT,
+	clNome 			Varchar(50) NOT NULL,
+    clSobrenome 	Varchar(50) NOT NULL,
+	clDtNascimento 	DATE NOT NULL,
+	clTratamento	char(15) NOT NULL,
+	clTipo			char(10) NOT NULL,
+	clEmail			Varchar(50) NOT NULL,
+	clDDD			SMALLINT(5) NOT NULL,
+	clCelular		integer(15) NOT NULL,
+    Primary key (clCod_Cliente)
+)engine=innodb default charset=UTF8;
+
+
+describe tabCliente;
+
+
+insert into tabCliente values (null,'Josefá','Cazaquistão','1963-12-01',
+								'Senhora', 'Adulto', 'sesefaTesuda2012@hotmail.com',
+								11,96666969),
+
+							(null,'Beatriz','Simma','1994-03-18',
+								'Senhorita', 'Adulto', 'amoOVitinho@yahoo.com.br',
+								63,987602341);
+                                
+                                
+select * from tabCliente;
+
+delete from tabCliente where clCod_Cliente=7;
+
+
+
+select * from tabAeronave;
+
+
+create table tabVoo
+(
+	voCod_Voo			int NOT NULL auto_increment,
+	vofkCod_Aeronave	int not null,
+	voOrigem			varchar(50) not null,
+	voDestino			varchar(50) not null,
+	voDataHoraSaida		datetime not null,
+	voDataHoraChegada	datetime not null,
+	voSituacao			varchar(20) not null,
+	primary key(voCod_Voo),
+	foreign key(vofkCod_Aeronave)
+	references tabAeronave(aeCod_Aeronave)
+)engine=innodb default charset=UTF8;
+
+
+describe tabVoo;
+
+insert into tabVoo values(null,5,'Malibu','Santos',
+	'2014-03-03 11:30', '2014-03-03 14:30:00', 'Confirmado'),
+	(null,2,'Carapicuiba','Caraguatatuba',
+	'2015-06-04 09:45', '2015-06-04 11:30:00', 'Cancelado');
+    
+    
+    
+select format(char(3),voDataHoraSaida, 103) from tabVoo;
+
+
+select vofkcod_aeronave from tabvoo;
+
+select * from tabvoo;
+
+select tabaeronave.aeCod_Aeronave,tabvoo.voorigem  
+from tabaeronave
+inner join tabvoo
+where tabaeronave.aeCod_Aeronave = tabvoo.vofkcod_aeronave; 
+
+
+select tabaeronave.*,tabvoo.* 
+from tabaeronave, tabvoo
+where tabaeronave.aeCod_Aeronave = tabvoo.vofkcod_aeronave; 
+
+
+select * from tabaeronave;
+
+
+select * from tabvoo;
+
+insert into tabVoo values(null,2,'Malibu','Santos',
+	'2014-03-03 11:30', '2014-03-03 14:30', 'Confirmado');
+    
+select v.voCod_Voo, a.aeQtPassageiros from tabvoo as v join tabaeronave as a where
+		v.vofkCod_Aeronave = a.aeCod_Aeronave;
+    
+    
+    
+create table tabPassagem
+(
+	paCod_Passagem		int not null,
+	pafkCod_Voo			int not null,
+	pafkCod_Cliente		int,
+	paPreco				decimal(10,2) not null,
+	paAssento			SMALLINT(3) not null,
+	paTaxa				decimal(10,2) not null,
+	primary key(paAssento, pafkCod_Voo),
+	foreign key(pafkCod_Voo) references tabVoo(voCod_Voo),
+	foreign key(pafkCod_Cliente) references tabCliente(clCod_Cliente)
+)engine=innodb default charset=UTF8;
+
+describe tabPassagem;
+
+insert into tabPassagem values(1,2,2,550.00,1,100.00);
+select * from tabpassagem;
+select p from tabPassagem as p join tabvoo as v where p.pafkCod_voo = v.voCod_Voo;
+
+drop table tabpassagem;
+
+
+select COUNT(paCod_Passagem) from tabpassagem;
+
+
+show tables;
+
+
+select v.* , COUNT(p.paCod_Passagem) as assentos from tabVoo as v join tabpassagem as p on v.voCod_Voo = p.pafkCod_Voo where p.pafkCod_Cliente is null AND v.voCod_Voo = 3;
+
+select v.* , COUNT(p.paCod_Passagem) as assentos from tabVoo as v join tabpassagem as p on v.voCod_Voo = p.pafkCod_Voo where p.pafkCod_Cliente is null AND v.voOrigem = 'Malibu' AND v.voDestino = 'Santos' AND DATE_FORMAT(v.voDataHoraSaida,'%Y-%m-%d') = '2014-03-03';

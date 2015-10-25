@@ -1,0 +1,37 @@
+element.style {
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+* {
+    margin: 0;
+    padding: 0;
+    outline: none 0;
+}
+user agent stylesheetdiv {
+    display: block;
+}
+Inherited from body#bodyInterna.body
+body {
+    font-family: arial !important;
+}
+body {
+    background-color: #fff;
+    margin: 0;
+    font-family: 'Arial';
+}
+body {
+    font-family: Arial;
+    font-size: 13px;
+    color: #5e5e5e;
+}
+body {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 8pt;
+    color: #676767;
+    background-color: #fff;
+    margin: 0px;
+    padding: 0px;
+}
