@@ -7,24 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.airlines.DAO.LoginDAO;
 import com.airlines.beans.Cliente;
-import com.airlines.beans.Login;
-import com.airlines.factory.DAOFactory;
+import com.airlines.beans.Passagem;
 
 /**
- * Servlet implementation class ControleLogin
+ * Servlet implementation class PassagemController
  */
-@WebServlet("/ControleLogin")
-public class LoginController extends HttpServlet {
+@WebServlet("/PassagemController")
+public class PassagemController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public PassagemController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +30,29 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String controle = request.getParameter("consultaPassagem");
+		Passagem p = null;
+		if(controle.equals("consultaPassagem")){
+			p = new Passagem();
+			int codigo = Integer.parseInt(request.getParameter("optionIda"));
+			p = ControlePassagem.dadosCompra(codigo);
+		}
+		request.setAttribute("passagem", p);
+		int qa = Integer.parseInt(request.getParameter("qtdA"));
+		int qb = Integer.parseInt(request.getParameter("qtdB"));
+		int qc = Integer.parseInt(request.getParameter("qtdC"));
+		request.setAttribute("qtdA",qa);
+		request.setAttribute("qtdB", qb);
+		request.setAttribute("qtdC", qc);
+		request.getRequestDispatcher("/areaLogada/compra.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String log = request.getParameter("user-email");
-		String senha = request.getParameter("user-pw");
-		System.out.println(log + senha);
-		Login login = new Login(log, senha);
-		
-		LoginDAO loginDAO = DAOFactory.getDAOFactory().getLoginDAO();
-		
-		Cliente logado = loginDAO.logar(login);
-		if(logado != null){
-			System.out.println(logado);
-			HttpSession s = request.getSession();
-			s.setAttribute("logado", logado);
-			System.out.println(s.getAttribute("logado"));
-			response.sendRedirect("areaLogada/menuFuncionario.jsp");
-		}
-		else System.out.println("Não Logado");
-		
+		// TODO Auto-generated method stub
 	}
+
 }

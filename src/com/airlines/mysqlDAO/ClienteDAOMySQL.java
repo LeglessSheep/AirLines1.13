@@ -79,4 +79,21 @@ public class ClienteDAOMySQL extends ClienteDAO{
 		con.close();      
 		return c;  
 	}
+	
+	
+	public int findUltimo() throws Exception{
+		con = ConnectionFactoryMySQL.conectar();      
+		stmt = con.prepareStatement("select MAX(clCod_Cliente) from tabCliente");
+		rs = stmt.executeQuery();      
+		int c = 0;
+		
+		if(rs.next())
+		{    
+			c = rs.getInt(1);
+			
+		}     
+		con.close();      
+		return c;
+		
+	}
 }

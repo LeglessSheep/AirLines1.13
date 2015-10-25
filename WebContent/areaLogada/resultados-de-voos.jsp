@@ -8,15 +8,15 @@
 <head>
 <title>Resultado de Voos</title>
 <meta charset="utf-8">
-<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/cufon-replace.js"></script> 
-<script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
-<script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
-<script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.4.2.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cufon-yui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cufon-replace.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_italic_600.font.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_italic_400.font.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_400.font.js"></script>
 <!--[if lt IE 9]>
 	<script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
 	<script type="text/javascript" src="js/html5.js"></script>
@@ -71,7 +71,7 @@
 			<article class="col1">
 			<div class="pad_1">
 				<h2 style="margin-bottom:5px">Seu Planejador de Voo:</h2>
-				<form id="form_1" action="VooController" method="GET">
+				<form id="form_1" action="${pageContext.request.contextPath}/VooController" method="GET">
 					<div class="wrapper">
 						<label class="pesquisa">Origem:</label>
 						<div class="bg"><input type="text" id="origem" name="origem" class="input input1" value="Entre com o Nome da Cidade" onblur="if(this.value=='') this.value='Entre com o Nome da Cidade'" onFocus="if(this.value =='Entre com o Nome da Cidade' ) this.value=''"></div>
@@ -128,7 +128,7 @@
 		<article class="col2 pad_left1" style="width:60%;float:left">
 			<h2><center>Selecione seu Voo abaixo:</center></h2>
 			<div class="resultados01">
-				<form id="form_2" method="GET" action="">
+				<form id="form_2" method="GET" action="${pageContext.request.contextPath}/PassagemController">
 					<table class="tg" width="600px">
 					  <%
 					  	if(request.getAttribute("voos") != null && !request.getAttribute("voos").equals("null")){
@@ -182,6 +182,10 @@
 					  	}  	
 					  	%>  
 					</table>
+					<input type="hidden" value="consultaPassagem" name="consultaPassagem"/>
+					<input type="hidden" value="${param.qtdA}" name="qtdA"/>
+					<input type="hidden" value="${param.qtdB}" name="qtdB"/>
+					<input type="hidden" value="${param.qtdC}" name="qtdC"/>
 				</form>
 			</div>
 			
@@ -190,7 +194,7 @@
 					<a href="javascript:history.go(-1)" class="button1" name="voltar" id="voltar" onClick="document.getElementById('form_1').excluir()">Voltar</a>
 				</div>
 				<div style="float:right;width:40%;margin-right:10px">
-					<a href="passagem.jsp" class="button2" name="confirmar" id="confirmar" style="margin-top:0px;" onClick="document.getElementById('form_1').confirmar()">Confirmar Compra</a>	
+					<a href="javascript:passagem();" class="button2" name="confirmar" id="confirmar" style="margin-top:0px;" onClick="document.getElementById('form_1').confirmar()">Confirmar Compra</a>	
 				</div>
 			</div>
 			
@@ -220,6 +224,13 @@
 	function consultar(){
 		if($("#qtdA").val() > 0){
 			$("#form_1").submit();
+		}
+		
+	}
+	
+	function passagem(){
+		if($("#optionIda").val() > 0){
+			$("#form_2").submit();
 		}
 		
 	}

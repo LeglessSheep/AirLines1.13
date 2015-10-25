@@ -9,21 +9,21 @@
 <head>
 <title>Aeronave</title>
 <meta charset="UTF-8">
-<!-- <link rel="stylesheet" href="css/styleLogin.css">
-<link rel="stylesheet" href="css/normalizeLogin.css"> -->
+<!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleLogin.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalizeLogin.css"> -->
 
-<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/cufon-replace.js"></script> 
-<script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
-<script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
-<script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.4.2.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cufon-yui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cufon-replace.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_italic_600.font.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_italic_400.font.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_400.font.js"></script>
 <!--[if lt IE 9]>
 	<script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
-	<script type="text/javascript" src="js/html5.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/html5.js"></script>
 <![endif]-->
 </head>
 <body id="page1">
@@ -134,7 +134,7 @@
 			<br>Aeronave</h2>
 			
 			<article class="colcol">
-				<form id="form" action="AeronaveController" method="get">
+				<form id="form" action="${pageContext.request.contextPath}/AeronaveController" method="get">
 					<div class="marker">
 						<div class="wrapper">
 							<p class="pad_bot2"><strong>Código da Aeronave:</strong></p>
@@ -151,7 +151,7 @@
 				<div class="aeronave">
 				
 					<h2>Informacoes sobre a Aeronave:</h2>
-					<form id="form_1" action="AeronaveController" method="post">
+					<form id="form_1" action="${pageContext.request.contextPath}/AeronaveController" method="post">
 						
 						<div class="wrapper"> <!-- wrapper some com o texto -->
 							<p class="pad_bot2"><strong>Código da Aeronave:</strong></p>

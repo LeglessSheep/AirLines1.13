@@ -8,6 +8,7 @@ public class Passagem {
 	private double	preco;
 	private int 	assento;
 	private double	taxa;
+	private int     tipo;
 
 	public Passagem() {
 	}
@@ -72,10 +73,24 @@ public class Passagem {
 		this.taxa = taxa;
 	}
 	
+	
+	public int getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Passagem [codigoPassagem=" + codigoPassagem+ ", preco="
-				+ preco + ", assento=" + assento + ", taxa=" + taxa + "\nDados do voo: " + voo.toString() + "]";
+		return "Passagem [codigoPassagem=" + codigoPassagem + ", voo=" + voo
+				+ ", cliente=" + cliente + ", preco=" + preco + ", assento="
+				+ assento + ", taxa=" + taxa + ", tipo=" + tipo + "]";
 	}
+
+
 
 }

@@ -18,5 +18,7 @@ public abstract class ClienteDAO extends DAO {
 	
 	//Método para obter 1 registro de um cliente pelo codigo  
 	public abstract  Cliente findByCodigo(Integer cod_Cliente) throws Exception;
+	
+	public abstract  int findUltimo() throws Exception;
 }
 

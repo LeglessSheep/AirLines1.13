@@ -22,8 +22,6 @@ public class LoginDAOMySQL extends LoginDAO
 		boolean logado = false;
 		Cliente c = null;
 		try {
-			//Abre a conexao
-			Connection con;
 			
 			con = ConnectionFactory.conectar();
 			ClienteDAO dao = DAOFactory.getDAOFactory().getClienteDAO();
@@ -52,6 +50,29 @@ public class LoginDAOMySQL extends LoginDAO
 		}
 		
 		return c;
+		
+	}
+
+	@Override
+	public void create(Login login, int cliente) {
+		try {
+			
+			con = ConnectionFactory.conectar();
+			
+			//Verifica se o login existe
+			stmt = con.prepareStatement("insert into tablogin values(md5(?), md5(?), ?)");
+			stmt.setString(1,login.getLogin());   
+			stmt.setString(2,login.getSenha());   
+			stmt.setInt(3, cliente);
+			stmt.execute();  
+			
+			con.close();    
+			//retornando o objeto Aeronave 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 

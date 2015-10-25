@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 
 import com.airlines.DAO.AeronaveDAO;
 import com.airlines.DAO.ClienteDAO;
+import com.airlines.DAO.LoginDAO;
 import com.airlines.beans.Cliente;
+import com.airlines.beans.Login;
 import com.airlines.factory.DAOFactory;
 
 public class ControleCliente {
@@ -31,7 +33,23 @@ public class ControleCliente {
 			e.printStackTrace();
 		}
 	}
-	
+	public static void cadastrarEmail(Cliente a, String senha){
+		
+		try{
+			ClienteDAO dao= DAOFactory.getDAOFactory().getClienteDAO();
+			if(validarCliente(a)){
+				dao.create(a);
+				int c = dao.findUltimo();
+				LoginDAO daol = DAOFactory.getDAOFactory().getLoginDAO();
+				Login login = new Login(a.getEmail(), senha);
+				daol.create(login, c);
+			}
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	public static boolean validarCodCliente(int codigo) throws Exception
 	{	

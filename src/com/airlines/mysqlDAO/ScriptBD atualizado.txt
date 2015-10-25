@@ -2,41 +2,8 @@
 
 create database airlines;
 
-show airlines;
-
 use airlines;
-
--- Tabela Cliente
-create table tabCliente
-( 
-    clCod_Cliente 	int NOT NULL AUTO_INCREMENT,
-	clNome 			Varchar(50) NOT NULL,
-    clSobrenome 	Varchar(50) NOT NULL,
-	clDtNascimento 	DATE NOT NULL,
-	clTratamento	char(15) NOT NULL,
-	clTipo			char(10) NOT NULL,
-	clEmail			Varchar(50) NOT NULL,
-	clDDD			SMALLINT(5) NOT NULL,
-	clCelular		integer(15) NOT NULL,
-    Primary key (clCod_Cliente)
-)engine=innodb default charset=UTF8;
-
-SHOW CREATE TABLE tabCliente;
-
-describe tabCliente;
-show tables;
-
-insert into tabCliente values (null,'Josefá','Cazaquistão','1963-12-01',
-								'Senhora', 'Adulto', 'sesefaTesuda2012@hotmail.com',
-								11,9666-6969),
-
-							(null,'Beatriz','Simma','1994-03-18',
-								'Senhorita', 'Adulto', 'amoOVitinho@yahoo.com.br',
-								63,98760-2341);
-
             
-select * from tabCliente order by clNome;
-
 -- Tabela Aeronave 
 
 create table tabAeronave
@@ -60,8 +27,6 @@ insert into tabAeronave values (null,'Forks 100','Piuzinho',
 								'Jatão', 242);
 
             
-select * from tabAeronave;
-
 create table tabVoo
 (
 	voCod_Voo			int NOT NULL auto_increment,
@@ -91,84 +56,6 @@ insert into tabVoo values(null,1,'Malibu','Santos',
 	'2014-03-03 11:30', '2014-03-03 14:30:00', 'Confirmado',1),
 	(null,2,'Carapicuiba','Caraguatatuba',
 	'2015-06-04 09:45', '2015-06-04 11:30:00', 'Cancelado',2);
-
-select * from tabVoo;
-
-create table tabPassagem
-(
-	paCod_Passagem		int NOT NULL auto_increment,
-	pafkCod_Voo			int not null,
-	pafkCod_Cliente		int,
-	paPreco				decimal(10,2) not null,
-	paAssento			SMALLINT(3) not null,
-	paTaxa				decimal(10,2) not null,
-	paPesoBagagem		decimal(10,2),
-	primary key(pa),
-	foreign key(pafkCod_Voo, paAssento)
-		references tabVoo(voCod_Voo),
-	foreign key(pafkCod_Cliente)
-		references tabCliente(clCod_Cliente),
-)engine=innodb default charset=UTF8;
-
-SHOW CREATE TABLE tabPassagem;
-describe tabPassagem;
-show tables;
-
-insert into tabPassagem values(null,1,1,302.3,23,45.75,4,21.1,'Reservada');
-
-select * from tabPassagem;
-
-create table tabCartao
-(
-	cafkCod_Passagem	int NOT NULL,
-	caTotal				decimal(10,2) not null,
-	caTitular			varchar(50) not null,
-	caCpf				smallint(10) not null,
-	caNumCartao			SMALLINT(15) not null,
-	caDtValidade		date not null,
-	caCodSeguranca		SMALLINT(1) not null,
-	primary key(cafkCod_Passagem),
-	foreign key(cafkCod_Passagem)
-		references tabPassagen(paCod_Passagem)
-		on delete no action
-		on update no action
-)engine=innodb default charset=UTF8;
-
-SHOW CREATE TABLE tabCartao;
-describe tabCartao;
-show tables;
-
-insert into tabCartao values(1,1,140.3,'Minha mamai',
-	333333333, 444444444, '2015-05-06', 2);
-
-select * from tabCartao;
-
-
-CREATE TABLE tabAssento(
-	assCod_Assento		int not null,
-	assCod_Voo			int not null,
-	assCod_Passagem		int,
-	primary key(assCod_Assento, assCod_Voo),
-	foreign key(assCod_Voo) references tabVoo(voCod_Voo),
-	foreign key(assCod_Passagem) references tabPassagem(paCod_Passagem)
-	)engine=innodb default charset=UTF8;
-	
-CREATE TABLE tabLogin(
-	login		varchar[45] not null,
-	senha		varchar[45] not null,
-	primary key(login),
-	)engine=innodb default charset=UTF8;
-	
-	
-	
-	
-	
--------------------------------------------------------------------------------------------------------
-show databases;
-
-create database airlines;
-
-use airlines;
 
 CREATE TABLE tabLogin(
 	login		varchar(45) not null,
@@ -245,46 +132,11 @@ create table tabVoo
 )engine=innodb default charset=UTF8;
 
 
-describe tabVoo;
-
 insert into tabVoo values(null,5,'Malibu','Santos',
 	'2014-03-03 11:30', '2014-03-03 14:30:00', 'Confirmado'),
 	(null,2,'Carapicuiba','Caraguatatuba',
 	'2015-06-04 09:45', '2015-06-04 11:30:00', 'Cancelado');
-    
-    
-    
-select format(char(3),voDataHoraSaida, 103) from tabVoo;
 
-
-select vofkcod_aeronave from tabvoo;
-
-select * from tabvoo;
-
-select tabaeronave.aeCod_Aeronave,tabvoo.voorigem  
-from tabaeronave
-inner join tabvoo
-where tabaeronave.aeCod_Aeronave = tabvoo.vofkcod_aeronave; 
-
-
-select tabaeronave.*,tabvoo.* 
-from tabaeronave, tabvoo
-where tabaeronave.aeCod_Aeronave = tabvoo.vofkcod_aeronave; 
-
-
-select * from tabaeronave;
-
-
-select * from tabvoo;
-
-insert into tabVoo values(null,2,'Malibu','Santos',
-	'2014-03-03 11:30', '2014-03-03 14:30', 'Confirmado');
-    
-select v.voCod_Voo, a.aeQtPassageiros from tabvoo as v join tabaeronave as a where
-		v.vofkCod_Aeronave = a.aeCod_Aeronave;
-    
-    
-    
 create table tabPassagem
 (
 	paCod_Passagem		int not null,
@@ -313,6 +165,40 @@ select COUNT(paCod_Passagem) from tabpassagem;
 show tables;
 
 
-select v.* , COUNT(p.paCod_Passagem) as assentos from tabVoo as v join tabpassagem as p on v.voCod_Voo = p.pafkCod_Voo where p.pafkCod_Cliente is null AND v.voCod_Voo = 3;
+select v.* , COUNT(p.paCod_Passagem) as assentos from tabVoo as v join tabpassagem as p on v.voCod_Voo = p.pafkCod_Voo where p.pafkCod_Cliente is null AND v.voCod_Voo = 10;
 
-select v.* , COUNT(p.paCod_Passagem) as assentos from tabVoo as v join tabpassagem as p on v.voCod_Voo = p.pafkCod_Voo where p.pafkCod_Cliente is null AND v.voOrigem = 'Malibu' AND v.voDestino = 'Santos' AND DATE_FORMAT(v.voDataHoraSaida,'%Y-%m-%d') = '2014-03-03';
+select v.* from tabVoo as v where v.voOrigem = 'Malibu' AND v.voDestino = 'Santos' AND DATE_FORMAT(v.voDataHoraSaida,'%Y-%m-%d') = '2014-03-03';
+select v.* , COUNT(p.paCod_Passagem) as assentos from tabVoo as v left join tabpassagem as p on v.voCod_Voo = p.pafkCod_Voo where p.pafkCod_Cliente is null AND v.voOrigem = 'Malibu' AND v.voDestino = 'Santos' AND DATE_FORMAT(v.voDataHoraSaida,'%Y-%m-%d') = '2014-03-03' group by v.voCod_Voo;
+
+select * from tabVoo;
+insert into tabVoo values(null, '5', 'Malibu', 'Santos', '2014-03-03 11:30:00', '2014-03-03 14:30:00', 'Confirmado');
+
+select MIN(paCod_Passagem) as min from tabPassagem where pafkCod_Voo = 10 AND pafkCod_Cliente is null;
+
+
+select * from tabvoo as v join tabpassagem as p on (v.voCod_Voo = p.pafkCod_Voo) where v.voCod_Voo = 12 AND p.pafkCod_Cliente IS NULL;
+
+ALTER TABLE tabpassagem ADD paTipoPassageiro smallint not null DEFAULT 1;
+
+alter table tabpassagem drop column patipopassageiro;
+
+
+describe tabpassagem;
+
+
+
+UPDATE tabpassagem SET pafkCod_Cliente = 2,paTipoPassageiro=2 WHERE pafkCod_Voo = 10 AND paCod_Passagem = 12;
+
+select * from tabpassagem WHERE pafkCod_Voo = 10 ; 
+
+
+select * from tabPassagem where pafkCod_Voo = 10 AND pafkCod_Cliente IS NULL;
+
+
+select aeQtPassageiros from tabAeronave as a join tabvoo as v on v.vofkCod_Aeronave = a.aeCod_Aeronave where v.vofkCod_Aeronave = 2;
+
+select * from tabvoo;
+select * from tabvoo order by voCod_Voo DESC;
+
+select * from tablogin;
+insert into tablogin values(md5('teste@teste.com'), md5('teste'), 8);

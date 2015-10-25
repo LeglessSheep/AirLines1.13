@@ -41,7 +41,7 @@ public class AeronaveController extends HttpServlet {
 		
 		request.setAttribute("aeronaves", to);
 		
-		request.getRequestDispatcher("aeronave.jsp?").forward(request, response);	
+		request.getRequestDispatcher("/areaLogada/aeronave.jsp").forward(request, response);	
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class AeronaveController extends HttpServlet {
 			ControleAeronave.cadastrar(a);
 			
 			request.setAttribute("mensagem", "Sucesso!");
-			request.getRequestDispatcher("aeronave.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/aeronave.jsp").forward(request, response);
 		}
 		
 		
@@ -75,7 +75,7 @@ public class AeronaveController extends HttpServlet {
 			ControleAeronave.alterar(a);
 			
 			request.setAttribute("mensagem", "Sucesso!");
-			request.getRequestDispatcher("aeronave.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/aeronave.jsp").forward(request, response);
 		}
 		
 		else if (controle.equals("deletar")){
@@ -86,7 +86,7 @@ public class AeronaveController extends HttpServlet {
 			ControleAeronave.deletar(a);
 			
 			request.setAttribute("mensagem", "Sucesso!");
-			request.getRequestDispatcher("aeronave.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/aeronave.jsp").forward(request, response);
 		}
 		
 	}

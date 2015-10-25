@@ -42,7 +42,7 @@ public class ClienteController extends HttpServlet {
 		
 		request.setAttribute("cliente", c);
 		
-		request.getRequestDispatcher("cliente.jsp?").forward(request, response);	
+		request.getRequestDispatcher("/areaLogada/cliente.jsp?").forward(request, response);	
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ClienteController extends HttpServlet {
 			ControleCliente.cadastrar(a);
 			
 			request.setAttribute("mensagem", "Sucesso!");
-			request.getRequestDispatcher("cliente.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/cliente.jsp").forward(request, response);
 		}
 		
 		else if(controle.equals("deletar")){
@@ -81,7 +81,7 @@ public class ClienteController extends HttpServlet {
 				request.setAttribute("mensagem", "Sucesso!");
 			}
 			else request.setAttribute("mensagem", "Falha!");
-			request.getRequestDispatcher("cliente.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/cliente.jsp").forward(request, response);
 		}
 		
 		else if(controle.equals("alterar")){
@@ -104,8 +104,31 @@ public class ClienteController extends HttpServlet {
 			ControleCliente.alterar(a);
 			
 			request.setAttribute("mensagem", "Sucesso!");
-			request.getRequestDispatcher("cliente.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/cliente.jsp").forward(request, response);
+		}
+		
+		else if(controle.equals("registrar")){
+				Cliente a = new Cliente();
+				a.setNome(request.getParameter("nome"));
+				a.setSobrenome(request.getParameter("sobrenome"));
+				a.setDtNascimento(request.getParameter("dtNascimento"));
+				a.setTratamento(request.getParameter("tratamento"));
+				a.setTipo(request.getParameter("tipo"));
+				a.setEmail(request.getParameter("e-mail"));
+				String telefone = request.getParameter("telefone");
+				String senha = request.getParameter("senha1");
+				System.out.println(telefone);
+				System.out.println(telefone.substring(0,2));
+				System.out.println(telefone.substring(2));
+				a.setDdd(Integer.parseInt(telefone.substring(0,2)));
+				a.setCelular(Integer.parseInt(telefone.substring(2)));
+				
+				ControleCliente.cadastrarEmail(a, senha);
+				
+				request.setAttribute("mensagem", "Sucesso!");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
 		}
 	}
 
-}
+

@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
 		<script type="text/javascript" src="js/cufon-yui.js"></script>
 		<script type="text/javascript" src="js/cufon-replace.js"></script> 
+			<script type="text/javascript" src="js/jquery.mask.min.js" ></script>
 		<script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
 		<script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
 		<script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
@@ -76,7 +77,7 @@
         </div>
         <div class="logmod__form">
 		
-          <form accept-charset="utf-8" action="#" class="simform">
+          <form accept-charset="utf-8" action="${pageContext.request.contextPath}/ClienteController?controle=registrar" id="formulario"class="simform" method="POST">
 			<div class="sminputs" style="border-bottom:none;padding-top:20px;padding-bottom:20px">
 				<div class="input full" style="height:50px;text-align:center;font-size=12px;">
 					<label class="string optional" for="user-name">Informações Pessoais:</label>
@@ -86,18 +87,18 @@
 			 <div class="sminputs">
               <div class="input string optional">
                 <label class="string optional" for="user-pw">Primeiro Nome</label>
-                <input class="string optional" maxlength="255" id="user-pw" placeholder="Primeiro Nome" type="text" size="50" />
+                <input class="string optional" maxlength="255" name="nome" placeholder="Primeiro Nome" type="text" size="50" />
               </div>
               <div class="input string optional">
                 <label class="string optional" for="user-pw-repeat">Sobrenome</label>
-                <input class="string optional" maxlength="255" id="user-pw-repeat" placeholder="Sobrenome" type="text" size="50" />
+                <input class="string optional" maxlength="255" name="sobrenome" placeholder="Sobrenome" type="text" size="50" />
               </div>
             </div>
 			
 			 <div class="sminputs">
 				  <div class="input string optional" style="width:37%">
 					<label class="string optional" for="user-pw">Nascimento</label>
-					<input class="string optional" maxlength="10" id="user-pw" placeholder="Data de Nascimento" type="date" size="10" />
+					<input class="string optional" maxlength="10" name="dtNascimento" placeholder="Data de Nascimento" type="date" size="10" />
 				  </div>
 				  <div class="input string optional" style="width:33%">
 					<label class="string optional" for="user-tratamento">Tratamento</label>
@@ -108,7 +109,7 @@
 				  </div>
 				  <div class="input string optional" style="width:30%;padding-bottom:60px;">
 					<label class="string optional" for="user-tratamento">Tipo</label>
-					<select name="tratamento">
+					<select name="tipo">
 						<option value="bebê">Bebê</option>
 						<option value="criança">Criança</option>
 						<option value="adulto">Adulto</option>
@@ -124,7 +125,7 @@
             <div class="sminputs">
               <div class="input full">
                 <label class="string optional" for="user-name">E-mail</label>
-                <input class="string optional" maxlength="255" id="user-email" placeholder="E-mail" type="email" size="50" />
+                <input class="string optional" maxlength="255" name="e-mail" placeholder="E-mail" type="email" size="50" />
               </div>
             </div>
 			 <div class="sminputs">
@@ -136,15 +137,15 @@
 			
 			<div class="sminputs">
               <div class="input full">
-                <label class="string optional" for="user-name">Telefone</label>
-                <input class="string optional" maxlength="20" id="user-telefone" placeholder="Telefone" type="text" size="20" />
+                <label class="string optional" for="user-name">DDD Telefone</label>
+                <input class="string optional" maxlength="20" id="telefone" name="telefone" placeholder="DD99999999" type="text" size="20" />
               </div>
             </div>
 			
             <div class="sminputs">
               <div class="input string optional">
                 <label class="string optional" for="user-pw">Senha</label>
-                <input class="string optional" maxlength="255" id="user-pw" placeholder="Senha" type="password" size="50" />
+                <input class="string optional" maxlength="255" name="senha1" placeholder="Senha" type="password" size="50" />
               </div>
               <div class="input string optional">
                 <label class="string optional" for="user-pw-repeat">Repita a Senha</label>
@@ -153,7 +154,7 @@
             </div>
             <div class="simform__actions">
 			  <br>
-              <input class="sumbit" name="commit" style="margin-top:20px" type="sumbit" value="Criar Conta" />
+              <input class="sumbit" id="commit" name="commit" style="margin-top:20px" type="sumbit" value="Criar Conta" />
               <span class="simform__actions-sidetext">Criando uma Conta você afirma que Aceitou os <a class="special" href="#" target="_blank" role="link">Termos de Privacidade</a></span>
             </div> 
           </form>
@@ -215,6 +216,11 @@
 				$("#cadastro").click();
 			}
 		});
+		
+		$("#commit").click(function(){
+			$("#formulario").submit();
+		});
+
 
 	</script>
     

@@ -4,39 +4,25 @@ import java.util.ArrayList;
 
 import com.airlines.beans.Passagem;
 
+
 public class PassagemTO {
 
-	private ArrayList<Passagem> passagens;
-	private VooTO voo;
-	
+	ArrayList<Passagem> passagens;
 	
 	public PassagemTO() {
-		passagens = new ArrayList<Passagem>();
-		voo = new VooTO();
+		// TODO Auto-generated constructor stub
 	}
-
 
 	public ArrayList<Passagem> getPassagens() {
 		return passagens;
 	}
 
-
 	public void setPassagens(ArrayList<Passagem> passagens) {
 		this.passagens = passagens;
 	}
-
-
-	public VooTO getVoo() {
-		return voo;
-	}
-
-
-	public void setVoo(VooTO voo) {
-		this.voo = voo;
-	}
+	
 	
 	public void add(Passagem p){
 		passagens.add(p);
 	}
-	
 }

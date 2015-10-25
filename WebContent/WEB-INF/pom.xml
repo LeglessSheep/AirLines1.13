@@ -9,6 +9,16 @@
 <artifactId>jsp-api</artifactId>
 <version>2.0</version>
 <scope>provided</scope>
+
+ <filter>  
+       <filter-name>validator</filter-name>  
+       <filter-class>LoginFilter</filter-class>  
+   </filter>  
+  
+   <filter-mapping>  
+       <filter-name>validator</filter-name>  
+	<url-pattern>/logado/*</url-pattern>  
+   </filter-mapping>  
 </dependency>
 </dependencies>
 </project>

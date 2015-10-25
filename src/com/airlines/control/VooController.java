@@ -36,17 +36,18 @@ public class VooController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String controle = request.getParameter("pesquisa");
+		System.out.println(controle);
 		if(controle.equals("pesquisa")){
 			Voo a = null;
 			int codigo = Integer.parseInt(request.getParameter("codigo"));
 			a = ControleVoo.consultar(codigo);
 			if(a.getCodigo() < 0){
 				request.setAttribute("mensagem", "Voo não encontrado!");
-				request.getRequestDispatcher("voo.jsp").forward(request, response);
+				request.getRequestDispatcher("/areaLogada/voo.jsp").forward(request, response);
 			}
 			else{
 				request.setAttribute("voo", a);
-				request.getRequestDispatcher("voo.jsp").forward(request, response);
+				request.getRequestDispatcher("/areaLogada/voo.jsp").forward(request, response);
 			}
 		}
 		else if(controle.equals("pesquisaVoos")){
@@ -61,11 +62,8 @@ public class VooController extends HttpServlet {
 			
 			request.setAttribute("voos", to);
 			request.setAttribute("passageiros", passageiros);
-			request.getRequestDispatcher("resultados-de-voos.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/resultados-de-voos.jsp").forward(request, response);
 		}
-		
-		
-		
 	}
 
 	/**
@@ -97,7 +95,7 @@ public class VooController extends HttpServlet {
 			ControleVoo.cadastrar(a);
 		
 			request.setAttribute("mensagem", "Sucesso!");
-			request.getRequestDispatcher("voo.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/voo.jsp").forward(request, response);
 		}
 		
 		else if(controle.equals("alterar")){
@@ -123,7 +121,7 @@ public class VooController extends HttpServlet {
 			ControleVoo.alterar(a);
 		
 			request.setAttribute("mensagem", "Sucesso!");
-			request.getRequestDispatcher("voo.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/voo.jsp").forward(request, response);
 		}
 		
 		else if(controle.equals("deletar")){
@@ -135,7 +133,7 @@ public class VooController extends HttpServlet {
 			System.out.println(mensagem);
 			
 			request.setAttribute("mensagem", mensagem);
-			request.getRequestDispatcher("voo.jsp").forward(request, response);
+			request.getRequestDispatcher("/areaLogada/voo.jsp").forward(request, response);
 		}
 	}
 

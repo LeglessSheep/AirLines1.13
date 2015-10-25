@@ -1,11 +1,9 @@
 package com.airlines.mysqlDAO;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import javax.swing.JOptionPane;
 
 import com.airlines.DAO.AeronaveDAO;
+import com.airlines.DAO.PassagemDAO;
 import com.airlines.DAO.VooDAO;
 import com.airlines.TO.VooTO;
 import com.airlines.beans.Voo;
@@ -28,7 +26,8 @@ public class VooDAOMySQL extends VooDAO{
 				stmt.setString	(5, v.getDataHoraChegada());
 				stmt.setString	(6, v.getSituacao());
 				
-				stmt.execute(); //executar      
+				stmt.execute(); //executar
+				registraAssentos();
 				con.close();
 			}
 			
@@ -129,33 +128,32 @@ public class VooDAOMySQL extends VooDAO{
 			private void registraAssentos() throws Exception{
 				
 				con = ConnectionFactory.conectar();      
-				stmt = con.prepareStatement("select MAX(voCod_Voo) from tabVoo");
+				stmt = con.prepareStatement("select * from tabvoo order by voCod_Voo DESC");
 				rs = stmt.executeQuery();
 				rs.next();
-				int codVoo = rs.getInt(1);
+				Voo codVoo;
+				codVoo = new Voo( rs.getInt("voCod_Voo"), rs.getString("voOrigem"), 
+						rs.getString("voDestino"), rs.getString("voDataHoraSaida"), 
+						rs.getString("voDataHoraChegada"), rs.getString("voSituacao"));
+	
+				codVoo.setCodigoAeronave(rs.getInt("vofkCod_Aeronave"));
+
 				con = ConnectionFactory.conectar();      
 				stmt = con.prepareStatement("select aeQtPassageiros from tabAeronave as a join tabvoo as v on v.vofkCod_Aeronave = a.aeCod_Aeronave where v.vofkCod_Aeronave = ?");
+				stmt.setInt(1, codVoo.getCodigoAeronave());
 				AeronaveDAO daoAeronave = DAOFactory.getDAOFactory().getAeronaveDAO();
-				
+				rs = stmt.executeQuery();
+				rs.next();
+				int assentos = rs.getInt(1);
+				PassagemDAO daopassagem = DAOFactory.getDAOFactory().getPassagemDAO();
+				daopassagem.create(codVoo.getCodigo(), assentos);
 			}
 			public static void main(String[] args) {
 				
-				VooDAO v = DAOFactory.getDAOFactory().getVooDAO();
+				VooDAOMySQL v = (VooDAOMySQL) DAOFactory.getDAOFactory().getVooDAO();
 				
 				try{
-					Voo voo = v.findByCodigo(3);
-					System.out.println(voo);
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					  
-					Calendar c = Calendar.getInstance();
-					c.setTime(sdf.parse(voo.getDataHoraSaida().substring(0,18)));
-					voo.setDataHoraSaida(sdf.format(c.getTime()));
-					System.out.println(voo.getDataHoraSaida());
-					System.out.println(voo.getOrigem());
-					System.out.println(voo.getDestino());
-					VooTO to = v.findByOrigemDestinoData(voo.getOrigem(), voo.getDestino(), voo.getDataHoraSaida());
-					System.out.println(to.getVoos().get(0));
-					System.out.println(to.getVoos().get(0).getAssento());
+					v.registraAssentos();
 					
 				}
 				

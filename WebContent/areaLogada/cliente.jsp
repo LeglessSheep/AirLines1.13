@@ -9,22 +9,22 @@
 <head>
 <title>Dados do Cliente</title>
 <meta charset="UTF-8">
-<!-- <link rel="stylesheet" href="css/styleLogin.css">
-<link rel="stylesheet" href="css/normalizeLogin.css"> -->
+<!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleLogin.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalizeLogin.css"> -->
 
-<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
-<script type="text/javascript" src="js/jquery.mask.min.js" ></script>
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/cufon-replace.js"></script> 
-<script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
-<script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
-<script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.4.2.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.mask.min.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cufon-yui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cufon-replace.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_italic_600.font.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_italic_400.font.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Myriad_Pro_400.font.js"></script>
 <!--[if lt IE 9]>
 	<script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
-	<script type="text/javascript" src="js/html5.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/html5.js"></script>
 <![endif]-->
 </head>
 <body id="page1">
@@ -45,8 +45,8 @@
 				<div class="right">
 					<nav>
 						<ul id="menu2">
-							<li><a href="indexLogin.html">Fazer Login</a></li>
-							<li><a href="indexLogin.html">Não tem Cadastro? Cadastre-se</a></li>
+							<li><a href="login.html">Fazer Login</a></li>
+							<li><a href="login">Não tem Cadastro? Cadastre-se</a></li>
 						</ul>
 						<ul id="top_nav">
 							<li><a href="index.html"><img src="images/img1.gif" alt=""></a></li>
