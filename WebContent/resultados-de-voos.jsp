@@ -160,8 +160,6 @@
 								  	out.println("Assentos <br>Disponivéis");		  			  	
 								  	out.println("</th>");		  	
 								  	out.println("<tr/>");
-								  	
-								  	
 									out.println("<tr>");
 									out.println("<td class='tg-baqh'>");
 									out.println("<div class='radioIda'>");
