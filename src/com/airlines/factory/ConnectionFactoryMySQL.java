@@ -14,7 +14,6 @@ public class ConnectionFactoryMySQL extends ConnectionFactory {
 	}
 	
 	public static Connection conectar() throws SQLException {
-		return DriverManager.getConnection(
-		"jdbc:mysql://localhost:3306/airlines?user=alunos&password=alunos");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/airlines?user=alunos&password=alunos");
 	}
 }
